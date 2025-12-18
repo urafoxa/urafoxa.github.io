@@ -1,0 +1,58 @@
+
+body {
+  margin: 0;
+  background: #808080;
+  background-image: url("../images/bg-tile.png");
+  font-family: "MS Sans Serif", Arial, sans-serif;
+}
+
+.topbar {
+  background: black;
+  color: white;
+  padding: 4px;
+  border-bottom: 2px solid white;
+}
+
+.page-wrap {
+  display: grid;
+  grid-template-columns: 72px auto 120px;
+  height: 100vh;
+}
+
+.leftbar, .rightbar {
+  padding: 6px;
+}
+
+.content-box {
+  background: black;
+  color: white;
+  margin: 8px;
+  border: 4px solid black;
+  outline: 2px solid white;
+  box-shadow: 0 0 0 4px #b44fa1;
+  overflow: hidden;
+}
+
+.inner-scroll {
+  height: 100%;
+  overflow-y: auto;
+  padding: 10px;
+}
+
+.leftbar img {
+  width: 48px;
+  margin-bottom: 6px;
+}
+
+.leftbar img.big {
+  width: 64px;
+}
+
+@media (max-width: 700px) {
+  .leftbar, .rightbar {
+    display: none;
+  }
+  .page-wrap {
+    grid-template-columns: auto;
+  }
+}
