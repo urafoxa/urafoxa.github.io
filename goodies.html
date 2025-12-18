@@ -22,11 +22,6 @@
 
   {% if group.name == 'root' %}
     <h2>loose bullshit</h2>
-    <ul>
-      {% for file in group.items %}
-        {% include file-row.html file=file %}
-      {% endfor %}
-    </ul>
 
   {% else %}
     <details>
@@ -34,11 +29,6 @@
         <img src="/icons/folder.png" width="16" height="16">
         {{ group.name }}
       </summary>
-      <ul>
-        {% for file in group.items %}
-          {% include file-row.html file=file %}
-        {% endfor %}
-      </ul>
     </details>
   {% endif %}
 
