@@ -37,7 +37,13 @@ body {
   padding: 10px;
 }
 .leftbar {
+display: block;
 float: left;
+}
+
+.rightbar {
+float: right;
+display: block;
 }
 
 .leftbar img {
