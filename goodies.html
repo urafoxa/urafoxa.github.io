@@ -6,157 +6,81 @@
 
 <h1>swaggy files</h1>
 
+
+
+
+<ul>
 {% assign goodies = site.static_files
   | where_exp: "f", "f.path contains '/!!goodies/'"
   | sort: "path" %}
 
-{% assign last_folder = "" %}
-{% assign in_details = false %}
+{% assign grouped = goodies | group_by_exp: "f",
+  "f.path | split:'/' | size == 3 ? 'root' : f.path | split:'/' | slice:2,1 | first" %}
 
-<h2>root</h2>
-<ul>
 
-{% assign goodies = site.static_files
-  | where_exp: "f", "f.path contains '/!!goodies/'"
-  | sort: "path" %}
+{% for group in grouped %}
 
-<!-- ROOT FILES -->
-<h2>loose bullshit</h2>
-<ul>
-        {% for file in goodies %}
-          {% assign p = f.path | split: '/' %}
-          {% if p.size > 3 and p[2] == folder %}
-            {% assign ext = f.extname | downcase %}
-            {% if ext == "" %}
-              {% assign icon = '/icons/comment.png' %}
-            {% else %}
-              {% case ext %}
-                {% when '.ogg' or '.mp3' or '.wav' %}
-                  {% assign icon = '/icons/music.png' %}
-                {% when '.mp4' or '.webm' %}
-                  {% assign icon = '/icons/film.png' %}
-                {% when '.webp' or '.png' or '.jpg' or '.bmp' or '.heic' or '.tga' or '.tif' or '.tiff' or '.heif' or '.hif' %}
-                  {% assign icon = '/icons/image.png' %}
-                {% when '.gif' %}
-                  {% assign icon = '/icons/picture_go.png' %}
-				{% when '.iso' %}
-				  {% assign icon = '/icons/dvd.png' %}
-				{% when '.nes' or '.gba' or '.bin' or '.rom' or '.ds' or '.3ds' or '.sfc' or '.gbc' or '.gb' or '.smc' or '.n64' or '.gen' or '.md' or '.smd' %}
-				  {% assign icon = '/icons/controller.png' %}
-				{% when '.html' %}
-				  {% assign icon = '/icons/tag.png' %}
-				{% when '.css' %}
-				  {% assign icon = '/icons/css.png' %}
-				{% when '' %}
-				  {% assign icon = '/icons/comment.png' %}
-                {% else %}
-				
-                  {% assign icon = '/icons/page_white.png' %}
-              {% endcase %}
-            {% endif %}
+  {% if group.name == 'root' %}
+    <h2>loose bullshit</h2>
+    <ul>
+      {% for file in group.items %}
+        {% include file-row.html file=file %}
+      {% endfor %}
+    </ul>
 
-    <li>
-      <img src="{{ icon }}" width="16" height="16">
-      <a href="{{ file.path }}">{{ file.name }}</a>
-    </li>
-  {% endif %}
-{% endfor %}
-</ul>
-
-<!-- FOLDERS -->
-{% assign folders = goodies | map: "path" %}
-{% assign seen = "" | split: "," %}
-
-{% for file in goodies %}
-  {% assign parts = file.path | split: '/' %}
-  {% if parts.size > 3 %}
-    {% assign folder = parts[2] %}
-
-    {% unless seen contains folder %}
-      {% assign seen = seen | push: folder %}
-
-      <details>
-        <summary>
-          <img src="/icons/folder.png" width="16" height="16">
-          {{ folder }}
-        </summary>
-        <ul>
-
-        {% for f in goodies %}
-          {% assign p = f.path | split: '/' %}
-          {% if p.size > 3 and p[2] == folder %}
-            {% assign ext = f.extname | downcase %}
-            {% if ext == "" %}
-              {% assign icon = '/icons/comment.png' %}
-            {% else %}
-              {% case ext %}
-                {% when '.ogg' or '.mp3' or '.wav' %}
-                  {% assign icon = '/icons/music.png' %}
-                {% when '.mp4' or '.webm' %}
-                  {% assign icon = '/icons/film.png' %}
-                {% when '.webp' or '.png' or '.jpg' or '.bmp' or '.heic' or '.tga' or '.tif' or '.tiff' or '.heif' or '.hif' %}
-                  {% assign icon = '/icons/image.png' %}
-                {% when '.gif' %}
-                  {% assign icon = '/icons/picture_go.png' %}
-				{% when '.iso' %}
-				  {% assign icon = '/icons/dvd.png' %}
-				{% when '.nes' or '.gba' or '.bin' or '.rom' or '.ds' or '.3ds' or '.sfc' or '.gbc' or '.gb' or '.smc' or '.n64' or '.gen' or '.md' or '.smd' %}
-				  {% assign icon = '/icons/controller.png' %}
-				{% when '.html' %}
-				  {% assign icon = '/icons/tag.png' %}
-				{% when '.css' %}
-				  {% assign icon = '/icons/css.png' %}
-				{% when '' %}
-				  {% assign icon = '/icons/comment.png' %}
-                {% else %}
-				
-                  {% assign icon = '/icons/page_white.png' %}
-              {% endcase %}
-            {% endif %}
-
-            <li>
-              <img src="{{ icon }}" width="16" height="16">
-              <a href="{{ f.path }}">{{ f.name }}</a>
-            </li>
-          {% endif %}
+  {% else %}
+    <details>
+      <summary>
+        <img src="/icons/folder.png" width="16" height="16">
+        {{ group.name }}
+      </summary>
+      <ul>
+        {% for file in group.items %}
+          {% include file-row.html file=file %}
         {% endfor %}
-
-        </ul>
-      </details>
-
-    {% endunless %}
+      </ul>
+    </details>
   {% endif %}
+
 {% endfor %}
 
+{% assign ext = include.file.extname | downcase %}
+
+            {% if ext == "" %}
+              {% assign icon = '/icons/comment.png' %}
+            {% else %}
+              {% case ext %}
+                {% when '.ogg' or '.mp3' or '.wav' %}
+                  {% assign icon = '/icons/music.png' %}
+                {% when '.mp4' or '.webm' %}
+                  {% assign icon = '/icons/film.png' %}
+                {% when '.webp' or '.png' or '.jpg' or '.bmp' or '.heic' or '.tga' or '.tif' or '.tiff' or '.heif' or '.hif' %}
+                  {% assign icon = '/icons/image.png' %}
+                {% when '.gif' %}
+                  {% assign icon = '/icons/picture_go.png' %}
+				{% when '.iso' %}
+				  {% assign icon = '/icons/dvd.png' %}
+				{% when '.nes' or '.gba' or '.bin' or '.rom' or '.ds' or '.3ds' or '.sfc' or '.gbc' or '.gb' or '.smc' or '.n64' or '.gen' or '.md' or '.smd' %}
+				  {% assign icon = '/icons/controller.png' %}
+				{% when '.html' %}
+				  {% assign icon = '/icons/tag.png' %}
+				{% when '.css' %}
+				  {% assign icon = '/icons/css.png' %}
+				{% when '' %}
+				  {% assign icon = '/icons/comment.png' %}
+                {% else %}
+				
+                  {% assign icon = '/icons/page_white.png' %}
+              {% endcase %}
+            {% endif %}
+			
+			<li>
+  <img src="{{ icon }}" width="16" height="16">
+  <a href="{{ include.file.path }}">{{ include.file.name }}</a>
+</li>
 
 </ul>
 
 </body>
-
-<style>
-details > summary {
-  cursor: pointer;
-  font-family: Tahoma, Verdana, sans-serif;
-  font-weight: bold;
-  margin: 4px 0;
-}
-
-details summary::-webkit-details-marker {
-  display: none;
-}
-
-details summary::before {
-  content: "▶ ";
-}
-
-details[open] summary::before {
-  content: "▼ ";
-}
-
-ul {
-  list-style: none;
-  padding-left: 20px;
-}
-<\style>
 
 </html>
