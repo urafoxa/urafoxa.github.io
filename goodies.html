@@ -13,7 +13,7 @@
 
 {% assign current_folder = "" %}
 
-<ul style="list-style: none; padding-left: 0;">
+<ul class="file-list">
 
 {% for file in goodies %}
 
@@ -33,14 +33,14 @@
 
     {% if folder == "root" %}
       <h2>loose bullshit</h2>
-      <ul style="list-style:none;padding-left:0;">
+      <ul class="file-list">
     {% else %}
       <details>
         <summary>
           <img src="/icons/folder.png" width="16" height="16">
           {{ folder }}
         </summary>
-        <ul style="list-style:none;padding-left:20px;">
+        <ul class="file-list">
     {% endif %}
 
     {% assign current_folder = folder %}
@@ -53,8 +53,10 @@
     {% assign icon = '/icons/music.png' %}
   {% elsif ext == 'mp4' or ext == 'webm' %}
     {% assign icon = '/icons/film.png' %}
-  {% elsif ext == 'png' or ext == 'jpg' or ext == 'jpeg' or ext == 'bmp' or ext == 'gif' %}
+  {% elsif ext == 'png' or ext == 'jpg' or ext == 'jpeg' or ext == 'bmp' or or ext == 'webp' %}
     {% assign icon = '/icons/image.png' %}
+  {% elsif ext == 'gif' %}
+    {% assign icon = '/icons/picture.png' %}
   {% elsif ext == 'iso' %}
     {% assign icon = '/icons/dvd.png' %}
   {% elsif ext == 'nes' or ext == 'gba' or ext == 'rom' or ext == 'bin' %}
@@ -75,6 +77,77 @@
 {% endfor %}
 
 </ul>
+
+<style>
+body {
+  background: #008080;
+  font-family: "MS Sans Serif", Tahoma, sans-serif;
+  color: black;
+}
+
+h1, h2 {
+  background: #c0c0c0;
+  border: 2px outset #fff;
+  padding: 4px 8px;
+  display: inline-block;
+}
+
+details {
+  margin-bottom: 4px;
+}
+
+summary {
+  background: #c0c0c0;
+  border: 2px outset #fff;
+  padding: 2px 6px;
+  cursor: pointer;
+  display: inline-block;
+}
+
+summary:hover {
+  background: #dcdcdc;
+}
+
+a {
+  color: #0000ff;
+  text-decoration: underline;
+}
+
+a:visited {
+  color: #800080;
+}
+
+.file-list li {
+  background: #ffffff;
+  border: 1px solid #808080;
+  margin: 1px 0;
+  padding: 2px 4px 2px 20px;
+}
+</style>
+
+<style>
+.file-list {
+  list-style: none;
+  padding-left: 0;
+  font-family: monospace;
+}
+
+.file-list li {
+  position: relative;
+  padding-left: 20px;
+}
+
+.file-list li::before {
+  content: "├─";
+  position: absolute;
+  left: 0;
+}
+
+.file-list li:last-child::before {
+  content: "└─";
+}
+</style>
+
 
 </body>
 </html>
