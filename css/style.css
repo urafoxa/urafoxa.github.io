@@ -22,7 +22,6 @@ body {
 }
 
 .content-box {
-  
   background: black;
   color: white;
   margin: 8px;
@@ -30,6 +29,7 @@ body {
   outline: 2px solid white;
   box-shadow: 0 0 0 4px #000000;
   overflow: hidden;
+  flex: 1;
 }
 
 .inner-scroll {
@@ -38,7 +38,8 @@ body {
   padding: 10px;
 }
 .leftbar {
-float: left;
+  width: 72px;
+  flex-shrink: 0
 }
 
 .rightbar {
@@ -47,17 +48,21 @@ float: right;
 
 .leftbar img {
   width: 48px;
+  align: left;
   display: block;
   margin-bottom: 6px;
 }
 
 .leftbar img.big {
   width: 64px;
+  align: left;
   display: block;
+  margin-bottom: 6px;
 }
 
 .page-wrap {
 	overflow: hidden;
+	display: flex;
 }
 
 
