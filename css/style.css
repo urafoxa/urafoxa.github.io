@@ -49,7 +49,7 @@ body {
 
 .leftbar img {
   width: 48px;
-  align: center;
+  text-align: justify;
   margin-bottom: 6px;
   margin-top: 6px;
   margin-left: 6px;
@@ -58,7 +58,7 @@ body {
 
 .leftbar img.big {
   width: 64px;
-  align: center;
+  text-align: justify;
   margin-bottom: 6px;
   margin-top: 6px;
   margin-left: 6px;
