@@ -36,6 +36,9 @@ body {
   overflow-y: auto;
   padding: 10px;
 }
+.leftbar {
+float: left;
+}
 
 .leftbar img {
   width: 48px;
