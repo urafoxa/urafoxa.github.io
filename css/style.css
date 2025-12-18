@@ -48,6 +48,10 @@ body {
   width: 64px;
 }
 
+.page-wrap {
+  height: calc(100vh - 1000px);
+}
+
 @media (max-width: 700px) {
   .leftbar, .rightbar {
     display: none;
