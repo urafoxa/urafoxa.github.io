@@ -54,6 +54,7 @@ body {
 
   .page-wrap {
     grid-template-columns: 1fr;
+	height: calc(100dvh - 32px);
   }
 
   .content-box {
@@ -62,8 +63,5 @@ body {
 }
 
 @media (min-width: 700px) and (orientation: landscape) {
-  .leftbar,
-  .rightbar {
-    display: flex;
-  }
+
 }
