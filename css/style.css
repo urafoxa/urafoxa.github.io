@@ -38,26 +38,31 @@ body {
   padding: 10px;
 }
 .leftbar {
-  width: 72px;
+  width: 128px;
   flex-shrink: 0
 }
 
 .rightbar {
-float: right;
+  width: 128px;
+  flex-shrink: 0
 }
 
 .leftbar img {
   width: 48px;
-  align: left;
-  display: block;
+  align: center;
   margin-bottom: 6px;
+  margin-top: 6px;
+  margin-left: 6px;
+  margin-right: 6px;ce
 }
 
 .leftbar img.big {
   width: 64px;
-  align: left;
-  display: block;
+  align: center;
   margin-bottom: 6px;
+  margin-top: 6px;
+  margin-left: 6px;
+  margin-right: 6px;
 }
 
 .page-wrap {
