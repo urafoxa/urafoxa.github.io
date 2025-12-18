@@ -37,22 +37,22 @@ body {
   padding: 10px;
 }
 .leftbar {
-display: block;
 float: left;
 }
 
 .rightbar {
 float: right;
-display: block;
 }
 
 .leftbar img {
   width: 48px;
+  display: block;
   margin-bottom: 6px;
 }
 
 .leftbar img.big {
   width: 64px;
+  display: block;
 }
 
 @media (orientation: portrait) {
