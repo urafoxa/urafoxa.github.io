@@ -15,7 +15,6 @@ body {
 
 .page-wrap {
   height: calc(100vh - 32px);
-  height: calc(100dvh - 32px);
 }
 
 .leftbar, .rightbar {
