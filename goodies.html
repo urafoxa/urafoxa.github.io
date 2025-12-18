@@ -11,38 +11,91 @@
   | sort: "path" %}
 
 {% assign last_folder = "" %}
+{% assign in_details = false %}
 
+<h2>root</h2>
 <ul>
+
 {% for file in goodies %}
   {% assign parts = file.path | split: '/' %}
-  {% assign folder = parts[2] %}
+  {% assign depth = parts | size %}
 
-  {% if folder != last_folder %}
-    {% if last_folder != "" %}</ul>{% endif %}
-    <h3>{{ folder }}</h3>
-    <ul>
-    {% assign last_folder = folder %}
-  {% endif %}
+  {% if depth == 3 %}
+    {%- comment -%} /!!goodies/file.ext {%- endcomment -%}
 
-  {% assign ext = file.extname | downcase %}
+    {% assign ext = file.extname | downcase %}
+    {% if ext == "" %}
+      {% assign icon = '/icons/comment.png' %}
+    {% else %}
+      {% case ext %}
+        {% when '.ogg' or '.mp3' or '.wav' %}
+          {% assign icon = '/icons/music.png' %}
+        {% when '.mp4' or '.webm' %}
+          {% assign icon = '/icons/film.png' %}
+        {% when '.gif' or '.png' or '.jpg' %}
+          {% assign icon = '/icons/image.png' %}
+        {% else %}
+          {% assign icon = '/icons/page_white.png' %}
+      {% endcase %}
+    {% endif %}
 
-{% case ext %}
-  {% when '.png' or '.jpg' or '.bmp' or '.webp' %}
-    {% assign icon = '/icons/image.png' %}
-  {% when '.zip' or '.rar' or '.7z' %}
-    {% assign icon = '/icons/page_white_zip.png' %}
-  {% when '.mp3' or '.wav' or '.ogg' %}
-    {% assign icon = '/icons/music.png' %}
+    <li>
+      <img src="{{ icon }}" width="16" height="16">
+      <a href="{{ file.path }}">{{ file.name }}</a>
+    </li>
+
   {% else %}
-    {% assign icon = '/icons/page_white.png' %}
-{% endcase %}
+    {%- comment -%} /!!goodies/folder/file.ext {%- endcomment -%}
 
-  <li>
-    <a href="{{ file.path }}">
-      {{ file.name }}
-    </a>
-  </li>
+    {% assign folder = parts[2] %}
+
+    {% if folder != last_folder %}
+      </ul>
+
+      {% if in_details %}
+        </details>
+      {% endif %}
+
+      <details>
+        <summary>
+          <img src="/icons/folder.png" width="16" height="16">
+          {{ folder }}
+        </summary>
+        <ul>
+
+      {% assign last_folder = folder %}
+      {% assign in_details = true %}
+    {% endif %}
+
+    {% assign ext = file.extname | downcase %}
+    {% if ext == "" %}
+      {% assign icon = '/icons/comment.png' %}
+    {% else %}
+      {% case ext %}
+        {% when '.ogg' or '.mp3' or '.wav' %}
+          {% assign icon = '/icons/music.png' %}
+        {% when '.mp4' or '.webm' %}
+          {% assign icon = '/icons/film.png' %}
+        {% when '.gif' or '.png' or '.jpg' %}
+          {% assign icon = '/icons/image.png' %}
+        {% else %}
+          {% assign icon = '/icons/page_white.png' %}
+      {% endcase %}
+    {% endif %}
+
+    <li>
+      <img src="{{ icon }}" width="16" height="16">
+      <a href="{{ file.path }}">{{ file.name }}</a>
+    </li>
+
+  {% endif %}
 {% endfor %}
+
+</ul>
+{% if in_details %}
+  </details>
+{% endif %}
+
 </ul>
 
 </body>
