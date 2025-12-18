@@ -46,3 +46,32 @@ body {
   width: 64px;
 }
 
+@media (orientation: portrait) {
+  .leftbar,
+  .rightbar {
+    display: none;
+  }
+
+  .page-wrap {
+    grid-template-columns: 1fr;
+	height: calc(100dvh - 32px);
+  }
+
+    h1 {
+        font-size: 3rem;
+    }
+    p {
+        font-size: 1.5rem;
+    }
+
+  .content-box {
+    margin: 6px;
+  }
+}
+
+@media (min-width: 700px) and (orientation: landscape) {
+  .leftbar,
+  .rightbar {
+    display: flex;
+  }
+}
