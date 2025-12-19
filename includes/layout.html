@@ -1,6 +1,66 @@
 <div class="topbar">
-  <marquee>I MAKE MUSIC AND ART AND STUFF.            WE LOVE SCROLLING MARQUEES! IT'S A NECESSITY NOWADAYS.            CAN TANKR BEST BAND OF '96            </marquee>
+  
 </div>
+
+<script>
+const marquees = [
+  {
+    text: "WELCOME TO THE FUCK ZONE",
+    direction: "left",
+    speed: 4,
+	loop: -1
+  },
+  {
+    text: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+    direction: "right",
+    speed: 1,
+	scrolldelay: 1,
+	behavior: "slide",
+	loop: -1
+  },
+  {
+    text: "↑ TOP SHELF ↑",
+    speed: 4,
+	loop: -1
+  },
+  {
+    text: "DVD",
+    direction: "down",
+	behavior: "alternate",
+    speed: 4,
+	loop: -1
+  },
+  {
+    text: "holy shit did you guys see that",
+    speed: 50,
+	loop: 1
+  }
+];
+</script>
+
+<script>
+const target = document.getElementById("marquee-box");
+const m = marquees[Math.floor(Math.random() * marquees.length)];
+
+const marquee = document.createElement("marquee");
+marquee.textContent = m.text;
+marquee.width = m.width;
+marquee.height = m.height;
+marquee.direction = m.direction;
+marquee.truespeed = 1;
+marquee.scrolldelay = m.scrolldelay;
+marquee.scrollAmount = m.speed;
+marquee.behavior = m.behavior;
+marquee.loop = m.looop;
+
+target.appendChild(marquee);
+</script>
+
+
+
+
+
+
 
 <div class="page-wrap">
   <div class="leftbar">
