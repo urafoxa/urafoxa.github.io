@@ -64,7 +64,7 @@ function startDVD() {
 
   // pixels per second (tune these)
   let vx = 120;
-  let vy = 80;
+  let vy = 40;
 
   let lastTime = null;
 
