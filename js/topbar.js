@@ -1,10 +1,10 @@
 function initTopbar() {
   const marquees = [
     { text: "WELCOME TO THE FUCK ZONE", direction: "left", speed: 4, weight: 5 },
-    { text: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", direction: "right", speed: 16, behavior: "slide", weight: 2 },
+    { text: "CanTankr is a band Ura likes in-universe, it's not real, I don't think!", direction: "left", speed: 8, behavior: "alternate", weight: 5 },
     { text: "↑ TOP SHELF ↑", direction: "left", speed: 4, weight: 4 },
     { text: "DVD", direction: "down", behavior: "alternate", speed: 4, weight: 1 },
-    { text: "holy shit did you guys see that", direction: "left", speed: 90, loop: 1, weight: 1 }
+    { text: "holy shit did you guys see that", direction: "left", speed: 140, loop: 1, weight: 1 }
   ];
 
   function pickWeighted(items) {
@@ -23,7 +23,7 @@ function initTopbar() {
   }
 
 
-  target.innerHTML = ""; // prevent duplicates
+  //target.innerHTML = ""; // breaks my fucking code
 
   const m = pickWeighted(marquees);
   console.log("topbar picked:", m.text);
