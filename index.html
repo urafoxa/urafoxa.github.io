@@ -8,13 +8,21 @@
 
 <div id="layout"></div>
 
+<script src="js/topbar.js"></script>
+<script src="js/ads.js"></script>
+
+
 <script>
 Promise.all([
-  fetch("_layouts/layout.html").then(r => r.text()),
+  fetch("includes/layout.html").then(r => r.text()),
   fetch("content/index.html").then(r => r.text())
 ]).then(([layout, content]) => {
   document.getElementById("layout").innerHTML = layout;
   document.getElementById("content").innerHTML = content;
+
+  // call script functions because god hates you
+  initTopbar();
+  initAds();
 });
 </script>
 

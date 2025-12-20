@@ -1,8 +1,3 @@
-<div id="topbar"></div>
-
-
-
-<script>
 function initTopbar() {
   const marquees = [
     { text: "WELCOME TO THE FUCK ZONE", direction: "left", speed: 4, weight: 5 },
@@ -27,8 +22,10 @@ function initTopbar() {
     return;
   }
 
+  target.innerHTML = ""; // prevent duplicates
+
   const m = pickWeighted(marquees);
-  console.log("picked:", m);
+  console.log("topbar picked:", m.text);
 
   const marquee = document.createElement("marquee");
   marquee.textContent = m.text;
@@ -40,37 +37,3 @@ function initTopbar() {
 
   target.appendChild(marquee);
 }
-
-if (document.readyState === "loading") {
-  document.addEventListener("DOMContentLoaded", initTopbar);
-} else {
-  initTopbar();
-}
-</script>
-
-
-
-
-
-
-
-<div class="page-wrap">
-  <div class="leftbar">
-    <a href="index.html"><img src="images/icon1.png"></a>
-    <a href="about.html"><img src="images/icon2.png"></a>
-    <a href="art.html"><img src="images/icon3.png" class="big"></a>
-  </div>
-
-  <div class="content-box">
-    <div class="inner-scroll" id="content">
-      <!-- SHIT GOES HERE -->
-    </div>
-  </div>
-
-
-<script src="js/ads.js"></script>
-  <div class="rightbar">
-    <a id="adlink"><img id="adimg"></a>
-  </div>
-</div>
-
