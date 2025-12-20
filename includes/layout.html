@@ -3,53 +3,24 @@
 
 
 <script>
-const marquees = [
-  {
-    text: "WELCOME TO THE FUCK ZONE",
-    direction: "left",
-    speed: 4,
-    weight: 5
-  },
-  {
-    text: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
-    direction: "right",
-    speed: 1,
-    behavior: "slide",
-    weight: 2
-  },
-  {
-    text: "↑ TOP SHELF ↑",
-    direction: "left",
-    speed: 4,
-    weight: 4
-  },
-  {
-    text: "DVD",
-    direction: "down",
-    behavior: "alternate",
-    speed: 4,
-    weight: 1
-  },
-  {
-    text: "holy shit did you guys see that",
-    direction: "left",
-    speed: 50,
-    loop: 1,
-    weight: 1
+document.addEventListener("DOMContentLoaded", () => {
+
+  const marquees = [
+    { text: "WELCOME TO THE FUCK ZONE", direction: "left", speed: 4, weight: 5 },
+    { text: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~", direction: "right", speed: 1, behavior: "slide", weight: 2 },
+    { text: "↑ TOP SHELF ↑", direction: "left", speed: 4, weight: 4 },
+    { text: "DVD", direction: "down", behavior: "alternate", speed: 4, weight: 1 },
+    { text: "holy shit did you guys see that", direction: "left", speed: 50, loop: 1, weight: 1 }
+  ];
+
+  function pickWeighted(items) {
+    const total = items.reduce((sum, i) => sum + (i.weight || 1), 0);
+    let r = Math.random() * total;
+    for (const item of items) {
+      r -= item.weight || 1;
+      if (r <= 0) return item;
+    }
   }
-];
-
-
-function pickWeighted(items) {
-  const total = items.reduce((sum, i) => sum + (i.weight || 1), 0);
-  let r = Math.random() * total;
-
-  for (const item of items) {
-    r -= item.weight || 1;
-    if (r <= 0) return item;
-  }
-}
-
 
   const target = document.getElementById("topbar");
   if (!target) {
@@ -69,8 +40,10 @@ function pickWeighted(items) {
   marquee.setAttribute("truespeed", "");
 
   target.appendChild(marquee);
-  
+
+});
 </script>
+
 
 
 
