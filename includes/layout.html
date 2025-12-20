@@ -1,6 +1,4 @@
-<div class="topbar">
-  
-</div>
+<div id="topbar"></div>
 
 <script>
 const marquees = [
@@ -8,34 +6,49 @@ const marquees = [
     text: "WELCOME TO THE FUCK ZONE",
     direction: "left",
     speed: 4,
-	loop: -1
+    loop: -1
   },
   {
-    text: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
+    text: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
     direction: "right",
     speed: 1,
-	scrolldelay: 1,
-	behavior: "slide",
-	loop: -1
+    behavior: "slide"
   },
   {
     text: "↑ TOP SHELF ↑",
+    direction: "left",
     speed: 4,
-	loop: -1
+    loop: -1
   },
   {
     text: "DVD",
     direction: "down",
-	behavior: "alternate",
+    behavior: "alternate",
     speed: 4,
-	loop: -1
+    loop: -1
   },
   {
     text: "holy shit did you guys see that",
+    direction: "left",
     speed: 50,
-	loop: 1
+    loop: 1
   }
 ];
+
+const target = document.getElementById("topbar");
+const m = marquees[Math.floor(Math.random() * marquees.length)];
+
+const marquee = document.createElement("marquee");
+marquee.textContent = m.text;
+marquee.direction = m.direction || "left";
+marquee.scrollAmount = m.speed || 4;
+marquee.behavior = m.behavior || "scroll";
+marquee.loop = m.loop ?? -1;
+
+if (m.scrolldelay) marquee.scrolldelay = m.scrolldelay;
+marquee.setAttribute("truespeed", "");
+
+target.appendChild(marquee);
 </script>
 
 <script>
@@ -51,7 +64,7 @@ marquee.truespeed = 1;
 marquee.scrolldelay = m.scrolldelay;
 marquee.scrollAmount = m.speed;
 marquee.behavior = m.behavior;
-marquee.loop = m.looop;
+marquee.loop = m.loop;
 
 target.appendChild(marquee);
 </script>
@@ -75,9 +88,10 @@ target.appendChild(marquee);
     </div>
   </div>
 
+
+<script src="js/ads.js"></script>
   <div class="rightbar">
     <a id="adlink"><img id="adimg"></a>
   </div>
 </div>
 
-<script src="js/ads.js"></script>
