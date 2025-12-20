@@ -10,6 +10,7 @@ body {
   background: black;
   font-family: "Win95", monospace;
   line-height: 24px;
+  overflow: hidden;
   color: white;
   padding: 4px;
   border-bottom: 2px solid white;
@@ -18,7 +19,7 @@ body {
 .page-wrap {
   height: calc(100vh - 32px);
 }
-
+	
 .leftbar, .rightbar {
   padding: 6px;
 }

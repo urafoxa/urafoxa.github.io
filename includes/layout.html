@@ -1,42 +1,60 @@
 <div id="topbar"></div>
 
+
+
 <script>
 const marquees = [
   {
     text: "WELCOME TO THE FUCK ZONE",
     direction: "left",
     speed: 4,
-    loop: -1
+    weight: 5
   },
   {
     text: "~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~",
     direction: "right",
     speed: 1,
-    behavior: "slide"
+    behavior: "slide",
+    weight: 2
   },
   {
     text: "↑ TOP SHELF ↑",
     direction: "left",
     speed: 4,
-    loop: -1
+    weight: 4
   },
   {
     text: "DVD",
     direction: "down",
     behavior: "alternate",
     speed: 4,
-    loop: -1
+    weight: 1
   },
   {
     text: "holy shit did you guys see that",
     direction: "left",
     speed: 50,
-    loop: 1
+    loop: 1,
+    weight: 1
   }
 ];
+</script>
 
+<script>
+function pickWeighted(items) {
+  const total = items.reduce((sum, i) => sum + (i.weight || 1), 0);
+  let r = Math.random() * total;
+
+  for (const item of items) {
+    r -= item.weight || 1;
+    if (r <= 0) return item;
+  }
+}
+</script>
+
+<script>
 const target = document.getElementById("topbar");
-const m = marquees[Math.floor(Math.random() * marquees.length)];
+const m = pickWeighted(marquees);
 
 const marquee = document.createElement("marquee");
 marquee.textContent = m.text;
@@ -44,27 +62,7 @@ marquee.direction = m.direction || "left";
 marquee.scrollAmount = m.speed || 4;
 marquee.behavior = m.behavior || "scroll";
 marquee.loop = m.loop ?? -1;
-
-if (m.scrolldelay) marquee.scrolldelay = m.scrolldelay;
 marquee.setAttribute("truespeed", "");
-
-target.appendChild(marquee);
-</script>
-
-<script>
-const target = document.getElementById("topbar");
-const m = marquees[Math.floor(Math.random() * marquees.length)];
-
-const marquee = document.createElement("marquee");
-marquee.textContent = m.text;
-marquee.width = m.width;
-marquee.height = m.height;
-marquee.direction = m.direction;
-marquee.truespeed = 1;
-marquee.scrolldelay = m.scrolldelay;
-marquee.scrollAmount = m.speed;
-marquee.behavior = m.behavior;
-marquee.loop = m.loop;
 
 target.appendChild(marquee);
 </script>
