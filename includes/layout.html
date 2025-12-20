@@ -38,9 +38,8 @@ const marquees = [
     weight: 1
   }
 ];
-</script>
 
-<script>
+
 function pickWeighted(items) {
   const total = items.reduce((sum, i) => sum + (i.weight || 1), 0);
   let r = Math.random() * total;
@@ -50,21 +49,27 @@ function pickWeighted(items) {
     if (r <= 0) return item;
   }
 }
-</script>
 
-<script>
-const target = document.getElementById("topbar");
-const m = pickWeighted(marquees);
 
-const marquee = document.createElement("marquee");
-marquee.textContent = m.text;
-marquee.direction = m.direction || "left";
-marquee.scrollAmount = m.speed || 4;
-marquee.behavior = m.behavior || "scroll";
-marquee.loop = m.loop ?? -1;
-marquee.setAttribute("truespeed", "");
+  const target = document.getElementById("topbar");
+  if (!target) {
+    console.error("topbar not found");
+    return;
+  }
 
-target.appendChild(marquee);
+  const m = pickWeighted(marquees);
+  console.log("picked:", m);
+
+  const marquee = document.createElement("marquee");
+  marquee.textContent = m.text;
+  marquee.direction = m.direction || "left";
+  marquee.scrollAmount = m.speed || 4;
+  marquee.behavior = m.behavior || "scroll";
+  marquee.loop = m.loop ?? -1;
+  marquee.setAttribute("truespeed", "");
+
+  target.appendChild(marquee);
+  
 </script>
 
 
