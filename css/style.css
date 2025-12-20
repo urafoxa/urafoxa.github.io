@@ -8,6 +8,7 @@ body {
 
 #topbar {
   background: black;
+  position: relative;
   font-family: "Win95", monospace;
   line-height: 22px;
   height: 22px;
@@ -16,6 +17,14 @@ body {
   padding: 4px;
   border-bottom: 2px solid white;
   box-shadow: 0 0 0 4px #000000;
+}
+
+#dvd {
+  position: absolute;
+  white-space: nowrap;
+  line-height: 12px;
+  font-size: 12px;
+  font-family: "Win95", monospace;
 }
 
 .page-wrap {

@@ -22,6 +22,20 @@ function initTopbar() {
     return;
   }
 
+
+  if (m.text === "DVD") {
+	marquee.style.fontSize = "12px";
+	marquee.style.lineHeight = "12px";
+	marquee.style.height = "100%";
+	const dvd = document.getElementById("dvd");
+	const p = document.createElement("p");
+	p.textContent = "DVD";
+	dvd.appendChild(p);
+	startDVD();
+	return;
+}
+
+
   target.innerHTML = ""; // prevent duplicates
 
   const m = pickWeighted(marquees);
@@ -35,17 +49,7 @@ function initTopbar() {
   marquee.loop = m.loop ?? -1;
   marquee.setAttribute("truespeed", "");
   // i hate good coding principles 
-  if (m.text === "DVD") {
-	marquee.style.fontSize = "12px";
-	marquee.style.lineHeight = "12px";
-	marquee.style.height = "100%";
-	const target = document.getElementById("dvd");
-	const p = document.createElement("p");
-	p.textContent = "DVD";
-	target.appendChild(p);
-	function startDVD();
-	return;
-}
+
 
   target.appendChild(marquee);
 }
