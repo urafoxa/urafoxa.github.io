@@ -10,7 +10,7 @@
 
 <script>
 Promise.all([
-  fetch("includes/layout.html").then(r => r.text()),
+  fetch("_layouts/layout.html").then(r => r.text()),
   fetch("content/index.html").then(r => r.text())
 ]).then(([layout, content]) => {
   document.getElementById("layout").innerHTML = layout;
