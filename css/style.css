@@ -6,10 +6,11 @@ body {
   font-family: "MS Sans Serif", Arial, sans-serif;
 }
 
-.topbar {
+#topbar {
   background: black;
   font-family: "Win95", monospace;
   line-height: 24px;
+  height: 24px;
   overflow: hidden;
   color: white;
   padding: 4px;
