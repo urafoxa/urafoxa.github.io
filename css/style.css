@@ -9,12 +9,13 @@ body {
 #topbar {
   background: black;
   font-family: "Win95", monospace;
-  line-height: 24px;
-  height: 24px;
+  line-height: 22px;
+  height: 22px;
   overflow: hidden;
   color: white;
   padding: 4px;
   border-bottom: 2px solid white;
+  box-shadow: 0 0 0 4px #000000;
 }
 
 .page-wrap {
