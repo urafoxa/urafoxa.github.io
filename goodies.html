@@ -1,52 +1,52 @@
----
----
-
 <!DOCTYPE html>
 <html>
 <body>
 
-<h1>My Swaggy Files :) :)</h1> <p>They're probably legal!<p>
+<h1>My Swaggy Files :) :)</h1>
+<p>They're probably legal!</p>
 
 {% assign goodies = site.static_files
-  | where_exp: "f", "f.path contains '/!!goodies/'"
-  | sort: "path" %}
+  | where_exp: "f", "f.path contains '/!!goodies/'" %}
+
+{%- assign folder_files = "" | split: "" -%}
+{%- assign root_files = "" | split: "" -%}
+
+{%- for file in goodies -%}
+  {%- assign parts = file.path | split:'/' -%}
+  {%- if parts.size > 3 -%}
+    {%- assign folder_files = folder_files | push: file -%}
+  {%- else -%}
+    {%- assign root_files = root_files | push: file -%}
+  {%- endif -%}
+{%- endfor -%}
+
+{%- assign folder_files = folder_files | sort: "path" -%}
+{%- assign root_files = root_files | sort: "name" -%}
 
 {% assign current_folder = "" %}
 
-<ul class="file-list">
-
-{% for file in goodies %}
+{% for file in folder_files %}
 
   {% assign parts = file.path | split:'/' %}
   {% assign folder = parts[2] %}
   {% assign filename = file.name %}
   {% assign ext = filename | split:'.' | last | downcase %}
 
-  {% if parts.size == 3 %}
-    {% assign folder = "root" %}
-  {% endif %}
-
   {% if folder != current_folder %}
     {% if current_folder != "" %}
-        </ul></details>
+      </ul></details>
     {% endif %}
 
-    {% if folder == "root" %}
-      <h2>loose bullshit</h2>
+    <details>
+      <summary>
+        <img src="/icons/folder.png" width="16" height="16">
+        {{ folder }}
+      </summary>
       <ul class="file-list">
-    {% else %}
-      <details>
-        <summary>
-          <img src="/icons/folder.png" width="16" height="16">
-          {{ folder }}
-        </summary>
-        <ul class="file-list">
-    {% endif %}
 
     {% assign current_folder = folder %}
   {% endif %}
 
-  {% comment %} ICON MAP {% endcomment %}
   {% if ext == filename %}
     {% assign icon = '/icons/comment.png' %}
   {% elsif ext == 'ogg' or ext == 'mp3' or ext == 'wav' %}
@@ -76,7 +76,48 @@
 
 {% endfor %}
 
-</ul>
+{% if current_folder != "" %}
+  </ul></details>
+{% endif %}
+
+{% if root_files.size > 0 %}
+  <h2>loose bullshit</h2>
+  <ul class="file-list">
+
+  {% for file in root_files %}
+    {% assign filename = file.name %}
+    {% assign ext = filename | split:'.' | last | downcase %}
+
+    {% if ext == filename %}
+      {% assign icon = '/icons/comment.png' %}
+    {% elsif ext == 'ogg' or ext == 'mp3' or ext == 'wav' %}
+      {% assign icon = '/icons/music.png' %}
+    {% elsif ext == 'mp4' or ext == 'webm' %}
+      {% assign icon = '/icons/film.png' %}
+    {% elsif ext == 'png' or ext == 'jpg' or ext == 'jpeg' or ext == 'bmp' or ext == 'webp' %}
+      {% assign icon = '/icons/image.png' %}
+    {% elsif ext == 'gif' %}
+      {% assign icon = '/icons/picture.png' %}
+    {% elsif ext == 'iso' %}
+      {% assign icon = '/icons/dvd.png' %}
+    {% elsif ext == 'nes' or ext == 'gba' or ext == 'rom' or ext == 'bin' or ext == 'smc' or ext == 'gbc' or ext == 'gb' or ext == 'sfc' or ext == 'gen' %}
+      {% assign icon = '/icons/controller.png' %}
+    {% elsif ext == 'html' %}
+      {% assign icon = '/icons/tag.png' %}
+    {% elsif ext == 'css' %}
+      {% assign icon = '/icons/css.png' %}
+    {% else %}
+      {% assign icon = '/icons/page_white.png' %}
+    {% endif %}
+
+    <li>
+      <img src="{{ icon }}" width="16" height="16">
+      <a href="{{ file.path }}">{{ file.name }}</a>
+    </li>
+  {% endfor %}
+
+  </ul>
+{% endif %}
 
 <style>
 @font-face {
@@ -85,8 +126,6 @@
     url("/fonts/w95fa.woff2") format("woff2"),
     url("/fonts/w95fa.woff") format("woff"),
     url("/fonts/W95FA.otf") format("opentype");
-  font-weight: normal;
-  font-style: normal;
 }
 
 body {
@@ -98,16 +137,9 @@ h1, h2 {
   border: 2px outset #fff;
   padding: 4px 8px;
   display: inline-block;
-  font-family: "Win95", "MS Sans Serif", Tahoma, sans-serif;
-}
-
-details {
-  margin-bottom: 4px;
-  font-family: "Win95", "MS Sans Serif", Tahoma, sans-serif;
 }
 
 summary {
-  font-family: "Win95", "MS Sans Serif", Tahoma, sans-serif;
   background: #c0c0c0;
   border: 2px outset #fff;
   padding: 2px 6px;
@@ -121,18 +153,10 @@ summary:hover {
 
 a {
   color: #0000ff;
-  text-decoration: underline;
 }
 
 a:visited {
   color: #800080;
-}
-
-.file-list li {
-  background: #ffffff;
-  border: 1px solid #808080;
-  margin: 1px 0;
-  padding: 2px 4px 2px 20px;
 }
 
 .file-list {
@@ -143,7 +167,10 @@ a:visited {
 
 .file-list li {
   position: relative;
-  padding-left: 20px;
+  background: #ffffff;
+  border: 1px solid #808080;
+  margin: 1px 0;
+  padding: 2px 4px 2px 20px;
 }
 
 .file-list li::before {
@@ -156,7 +183,6 @@ a:visited {
   content: "└─";
 }
 </style>
-
 
 </body>
 </html>
