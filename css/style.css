@@ -26,6 +26,9 @@ body {
   font-size: 12px;
   font-family: "Win95", monospace;
 }
+#dvd p {
+  margin: 0;
+}
 
 .page-wrap {
   height: calc(100vh - 32px);
