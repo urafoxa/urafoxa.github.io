@@ -23,7 +23,14 @@ function initTopbar() {
   }
 
 
-  if (m.text === "DVD") {
+  target.innerHTML = ""; // prevent duplicates
+
+  const m = pickWeighted(marquees);
+  console.log("topbar picked:", m.text);
+
+  const marquee = document.createElement("marquee");
+  
+ if (m.text === "DVD") {
 	marquee.style.fontSize = "12px";
 	marquee.style.lineHeight = "12px";
 	marquee.style.height = "100%";
@@ -34,14 +41,8 @@ function initTopbar() {
 	startDVD();
 	return;
 }
-
-
-  target.innerHTML = ""; // prevent duplicates
-
-  const m = pickWeighted(marquees);
-  console.log("topbar picked:", m.text);
-
-  const marquee = document.createElement("marquee");
+  
+  
   marquee.textContent = m.text;
   marquee.direction = m.direction || "left";
   marquee.scrollAmount = m.speed || 4;
