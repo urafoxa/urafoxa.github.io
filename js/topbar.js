@@ -61,20 +61,41 @@ function startDVD() {
 
   let x = 10;
   let y = 5;
-  let vx = 1.5;
-  let vy = 1;
 
-  function tick() {
+  // pixels per second (tune these)
+  let vx = 120;
+  let vy = 80;
+
+  let lastTime = null;
+
+  function tick(time) {
+    if (!lastTime) lastTime = time;
+    const dt = (time - lastTime) / 1000; // seconds
+    lastTime = time;
+
     const bw = bar.clientWidth;
     const bh = bar.clientHeight;
     const dw = dvd.offsetWidth;
     const dh = dvd.offsetHeight;
 
-    x += vx;
-    y += vy;
+    x += vx * dt;
+    y += vy * dt;
 
-    if (x <= 0 || x + dw >= bw) vx *= -1;
-    if (y <= 0 || y + dh >= bh) vy *= -1;
+    if (x <= 0) {
+      x = 0;
+      vx *= -1;
+    } else if (x + dw >= bw) {
+      x = bw - dw;
+      vx *= -1;
+    }
+
+    if (y <= 0) {
+      y = 0;
+      vy *= -1;
+    } else if (y + dh >= bh) {
+      y = bh - dh;
+      vy *= -1;
+    }
 
     dvd.style.left = x + "px";
     dvd.style.top = y + "px";
@@ -82,5 +103,5 @@ function startDVD() {
     requestAnimationFrame(tick);
   }
 
-  tick();
+  requestAnimationFrame(tick);
 }
