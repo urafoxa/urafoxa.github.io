@@ -43,7 +43,7 @@ function initTopbar() {
 	const p = document.createElement("p");
 	p.textContent = "DVD";
 	target.appendChild(p);
-	function startDVD()
+	function startDVD();
 	return;
 }
 
